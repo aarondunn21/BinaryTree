@@ -1,0 +1,4 @@
+C:\Users\Aaron\AppData\Local\JetBrains\CLion2021.3\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/cygdrive/d/CLion 2020.3.1/bin/ninja/cygwin/ninja.exe" -G Ninja /cygdrive/c/Users/Aaron/CLionProjects/BinaryTree
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /cygdrive/c/Users/Aaron/CLionProjects/BinaryTree/cmake-build-debug
