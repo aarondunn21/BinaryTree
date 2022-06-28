@@ -29,19 +29,25 @@ class BET {
 private:
     stack<BinaryNode*> expStack;
     void infixRecursion(BinaryNode* b);
+    void makeEmpty(BinaryNode* &t);
+    BinaryNode* clone(BinaryNode* &t);
     void postfixRecursion(BinaryNode* b);
-
+    int treeSize(BinaryNode* b);
+    int leaf_nodes(BinaryNode* b);
 
 public:
     BET();
     explicit BET(const string& postfix);
     BET(const BET& x);
     ~BET();
+    bool buildFromPostfix(const string& postfix);
     const BET& operator= (const BET& x);
     string GetTop();
-    void PrintInfixExpression();
-    void PrintPostfixExpression();
+    void printInfixExpression();
+    void printPostfixExpression();
     bool empty();
+    int size();
+    int leaf_nodes();
 
 
 

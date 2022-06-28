@@ -10,7 +10,7 @@
 using namespace std;
 
 BET::BET() {
-    BinaryNode a1;
+    BinaryNode* a1;
 }
 
 BET::BET(const string &postfix) {
@@ -29,7 +29,6 @@ BET::BET(const string &postfix) {
             expStack.pop();
             a->left = expStack.top();
             expStack.pop();
-
             expStack.push(a);
 
 
@@ -52,21 +51,44 @@ BET::BET(const string &postfix) {
 }
 
 BET::BET(const BET & x) {
-    this->expStack  = x.expStack;
+    stack<BinaryNode*> temp;
+    temp = x.expStack;
+    this->expStack = temp;
+}
+
+bool BET::buildFromPostfix(const string &postfix) {
+    if(!empty()){
+        makeEmpty(expStack.top());
+        expStack.pop();
+    }
+
+    BET temp(postfix);
+    expStack = temp.expStack;
+
+    return true;
 }
 
 const BET &BET::operator=(const BET & x) {
-    this->expStack = x.expStack;
+    stack<BinaryNode*> temp;
+    temp = x.expStack;
+    this->expStack = temp;
     return *this;
 }
 
-void BET::PrintInfixExpression() {
+void BET::printInfixExpression() {
     BinaryNode* temp = expStack.top();
+//    stack<BinaryNode*> tempStack = expStack;
+//    string postfixString = ;
+//    while(!tempStack.empty()){
+//        postfixString += tempStack.top()->element;
+//        tempStack.pop();
+//    }
+//    cout << postfixString;
     infixRecursion(temp);
     cout << endl;
 }
 
-void BET::PrintPostfixExpression() {
+void BET::printPostfixExpression() {
     BinaryNode* temp = expStack.top();
     postfixRecursion(temp);
     cout << endl;
@@ -104,6 +126,57 @@ BET::~BET() {
         expStack.pop();
     }
 }
+
+int BET::treeSize(BinaryNode* b) {
+    if(b == nullptr){
+        return 0;
+    }
+    else{
+        return 1 + treeSize(b->left) + treeSize(b->right);
+        //recurse through children and add 1 for root
+    }
+}
+
+int BET::size() {
+//    BinaryNode* temp;
+//    stack<BinaryNode*> tempStack = expStack;
+    int size = 0;
+    size += treeSize(expStack.top());
+    return size;
+}
+
+int BET::leaf_nodes(BET::BinaryNode *b) {
+    if(b == nullptr){
+        return 0;
+    }
+    else{
+        if(b->left == nullptr && b->left == nullptr){
+            return 1;
+        }
+        else{
+            return leaf_nodes(b->left) + leaf_nodes(b->right);
+        }
+        //recurse through children to find leafs
+    }
+}
+
+int BET::leaf_nodes() {
+    int size = 0;
+    size += leaf_nodes(expStack.top());
+    return size;
+}
+
+void BET::makeEmpty(BET::BinaryNode* &t) {
+    t->left = nullptr;
+    t->right = nullptr;
+}
+
+BET::BinaryNode *BET::clone(BET::BinaryNode *&t) {
+    BinaryNode* temp = new BinaryNode;
+    temp = t;
+    return temp;
+}
+
 
 
 
