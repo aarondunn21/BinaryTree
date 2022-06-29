@@ -72,8 +72,8 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 
 build cmake_object_order_depends_target_BinaryTree: phony || CMakeFiles/BinaryTree.dir
 
-build CMakeFiles/BinaryTree.dir/main.cpp.o: CXX_COMPILER__BinaryTree_Debug /cygdrive/c/Users/Aaron/CLionProjects/BinaryTree/main.cpp || cmake_object_order_depends_target_BinaryTree
-  DEP_FILE = CMakeFiles/BinaryTree.dir/main.cpp.o.d
+build CMakeFiles/BinaryTree.dir/proj4_driver.cpp.o: CXX_COMPILER__BinaryTree_Debug /cygdrive/c/Users/Aaron/CLionProjects/BinaryTree/proj4_driver.cpp || cmake_object_order_depends_target_BinaryTree
+  DEP_FILE = CMakeFiles/BinaryTree.dir/proj4_driver.cpp.o.d
   FLAGS = -g -std=gnu++11
   OBJECT_DIR = CMakeFiles/BinaryTree.dir
   OBJECT_FILE_DIR = CMakeFiles/BinaryTree.dir
@@ -92,7 +92,7 @@ build CMakeFiles/BinaryTree.dir/BET.cpp.o: CXX_COMPILER__BinaryTree_Debug /cygdr
 #############################################
 # Link the executable BinaryTree.exe
 
-build BinaryTree.exe: CXX_EXECUTABLE_LINKER__BinaryTree_Debug CMakeFiles/BinaryTree.dir/main.cpp.o CMakeFiles/BinaryTree.dir/BET.cpp.o
+build BinaryTree.exe: CXX_EXECUTABLE_LINKER__BinaryTree_Debug CMakeFiles/BinaryTree.dir/proj4_driver.cpp.o CMakeFiles/BinaryTree.dir/BET.cpp.o
   FLAGS = -g
   LINK_FLAGS = -Wl,--enable-auto-import
   OBJECT_DIR = CMakeFiles/BinaryTree.dir

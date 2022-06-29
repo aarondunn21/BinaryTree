@@ -10,14 +10,14 @@
 
 using namespace std;
 
-
-
 class BET {
     struct BinaryNode{
         string element;
         struct BinaryNode *left;
         struct BinaryNode *right;
     };
+    //struct for each binary node
+
     struct BinaryNode* newNode(string e){
         BinaryNode* node = new BinaryNode;
         node->element = e;
@@ -25,6 +25,7 @@ class BET {
         node->right = nullptr;
         return node;
     }
+    //create new node with passed in element
 
 private:
     stack<BinaryNode*> expStack;
@@ -42,12 +43,11 @@ public:
     ~BET();
     bool buildFromPostfix(const string& postfix);
     const BET& operator= (const BET& x);
-    string GetTop();
     void printInfixExpression();
     void printPostfixExpression();
-    bool empty();
     int size();
     int leaf_nodes();
+    bool empty();
 
 
 

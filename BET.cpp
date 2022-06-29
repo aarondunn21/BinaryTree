@@ -12,13 +12,13 @@ using namespace std;
 BET::BET() {
     BinaryNode* a1;
 }
+//default constructor
 
 BET::BET(const string &postfix) {
     stringstream ss;
     string temp;
-    //BinaryNode *a, *b, *c;
-
     ss << postfix;
+    //take each element in string separately
 
     while(!ss.eof()){
         ss >> temp;
@@ -30,21 +30,12 @@ BET::BET(const string &postfix) {
             a->left = expStack.top();
             expStack.pop();
             expStack.push(a);
-
-
-
-//            BinaryNode *a = new BinaryNode(temp);
-//            BinaryNode b = BinaryNode(expStack.top().element);
-//            expStack.pop();
-//            BinaryNode c = BinaryNode(expStack.top().element);
-//            expStack.pop();
-//            *a->right = b;
-//            *a->left = c;
-//            expStack.push(*a);
+            //check if operator and use previous operators
         }
         else{
             BinaryNode *a = newNode(temp);
             expStack.push(a);
+            //add to stack if operand
         }
 
     }
@@ -54,6 +45,7 @@ BET::BET(const BET & x) {
     stack<BinaryNode*> temp;
     temp = x.expStack;
     this->expStack = temp;
+    //deep copy constructor
 }
 
 bool BET::buildFromPostfix(const string &postfix) {
@@ -61,29 +53,26 @@ bool BET::buildFromPostfix(const string &postfix) {
         makeEmpty(expStack.top());
         expStack.pop();
     }
+    //empty out current tree
 
     BET temp(postfix);
     expStack = temp.expStack;
+    //create new tree
 
     return true;
 }
 
 const BET &BET::operator=(const BET & x) {
-    stack<BinaryNode*> temp;
-    temp = x.expStack;
-    this->expStack = temp;
+    BinaryNode* temp1 = x.expStack.top();
+    BinaryNode* temp2;
+    temp2 = clone(temp1);
+    expStack.push(temp2);
     return *this;
+    //assignment overload using private helper clone function
 }
 
 void BET::printInfixExpression() {
     BinaryNode* temp = expStack.top();
-//    stack<BinaryNode*> tempStack = expStack;
-//    string postfixString = ;
-//    while(!tempStack.empty()){
-//        postfixString += tempStack.top()->element;
-//        tempStack.pop();
-//    }
-//    cout << postfixString;
     infixRecursion(temp);
     cout << endl;
 }
@@ -93,15 +82,12 @@ void BET::printPostfixExpression() {
     postfixRecursion(temp);
     cout << endl;
 }
-
-string BET::GetTop() {
-    return expStack.top()->element;
-}
+//use recursion helper functions to traverse tree and print
 
 void BET::infixRecursion(BinaryNode* b) {
     if(b != nullptr){
         infixRecursion(b->left);
-        cout << b->element << " ";
+        cout << b->element << endl;
         infixRecursion(b->right);
     }
 }
@@ -113,6 +99,7 @@ void BET::postfixRecursion(BET::BinaryNode *b) {
         cout << b->element << " ";
     }
 }
+//recursive fucntions to traverse tree and print elements
 
 bool BET::empty() {
     if(expStack.empty()){
@@ -120,12 +107,14 @@ bool BET::empty() {
     }
     else return false;
 }
+//check if tree is empty
 
 BET::~BET() {
     while(!expStack.empty()){
         expStack.pop();
     }
 }
+//destructor
 
 int BET::treeSize(BinaryNode* b) {
     if(b == nullptr){
@@ -138,12 +127,11 @@ int BET::treeSize(BinaryNode* b) {
 }
 
 int BET::size() {
-//    BinaryNode* temp;
-//    stack<BinaryNode*> tempStack = expStack;
     int size = 0;
     size += treeSize(expStack.top());
     return size;
 }
+//use recursion traversal to find size of tree
 
 int BET::leaf_nodes(BET::BinaryNode *b) {
     if(b == nullptr){
@@ -169,21 +157,16 @@ int BET::leaf_nodes() {
 void BET::makeEmpty(BET::BinaryNode* &t) {
     t->left = nullptr;
     t->right = nullptr;
+    t->element = " ";
 }
+//use recursion traversal to find amount of leafs
+
 
 BET::BinaryNode *BET::clone(BET::BinaryNode *&t) {
     BinaryNode* temp = new BinaryNode;
     temp = t;
     return temp;
 }
-
-
-
-
-
-
-
-
-
+//make new pointer to point to copy of passed in node.
 
 
